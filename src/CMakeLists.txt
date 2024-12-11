@@ -17,6 +17,8 @@ target_link_libraries("bullet-shower"
 
 string(TOLOWER "bulletshower.${CMAKE_SYSTEM_NAME}.${CMAKE_SYSTEM_PROCESSOR}" "BULLET_SHOWER_OUTPUT_NAME")
 set_target_properties("bullet-shower" PROPERTIES
+    CXX_VISIBILITY_PRESET "hidden"
     DEBUG_POSTFIX ".d"
     OUTPUT_NAME "${BULLET_SHOWER_OUTPUT_NAME}"
+    VISIBILITY_INLINES_HIDDEN ON
 )
