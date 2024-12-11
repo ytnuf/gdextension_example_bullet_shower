@@ -2,3 +2,6 @@
 CompileFlags:
     Add: -Wno-unknown-warning-option
     Remove: [-m*, -f*]
+
+Diagnostics:
+    Suppress: -Wimplicit-float-conversion
