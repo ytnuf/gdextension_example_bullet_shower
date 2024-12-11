@@ -2,7 +2,6 @@
 #include "register_types.hpp"
 
 #include "bullets.hpp"
-#include "gdexample.hpp"
 
 #include <gdextension_interface.h>
 
@@ -20,7 +19,6 @@ void initialise_bullet_shower_module(ModuleInitializationLevel p_level) {
     if(p_level != MODULE_INITIALIZATION_LEVEL_SCENE)
         return;
 
-    GDREGISTER_CLASS(GDExample);
     GDREGISTER_CLASS(Bullets);
 }
 

@@ -116,6 +116,3 @@ void Bullets::_exit_tree() {
     physics_server.free_rid(m_shape);
     m_bullets.clear();
 }
-
-void Bullets::_bind_methods() {
-}

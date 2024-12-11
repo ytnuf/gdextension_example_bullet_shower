@@ -25,9 +25,6 @@ public:
     void _draw() override;
     void _exit_tree() override;
 
-protected:
-    static void _bind_methods();
-
 private:
     godot::Ref<godot::Texture2D> m_bullet_image;
     godot::RID m_shape;

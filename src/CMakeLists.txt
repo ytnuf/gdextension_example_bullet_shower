@@ -2,7 +2,6 @@
 add_library("bullet-shower" SHARED)
 target_sources("bullet-shower" PRIVATE
     "bullets.cpp" "bullets.hpp"
-    "gdexample.cpp" "gdexample.hpp"
     "register_types.cpp" "register_types.hpp"
 )
 
