@@ -14,3 +14,9 @@ target_link_libraries("bullet-shower"
     PRIVATE "bullet-shower::options"
     PRIVATE "unofficial::godot::cpp"
 )
+
+string(TOLOWER "bulletshower.${CMAKE_SYSTEM_NAME}.${CMAKE_SYSTEM_PROCESSOR}" "BULLET_SHOWER_OUTPUT_NAME")
+set_target_properties("bullet-shower" PROPERTIES
+    DEBUG_POSTFIX ".d"
+    OUTPUT_NAME "${BULLET_SHOWER_OUTPUT_NAME}"
+)
