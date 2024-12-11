@@ -13,6 +13,7 @@ compile_commands.json
 .*
 !.astylerc
 !.clang-tidy
+!.clangd
 !.dockerignore
 !.gdextension
 !.gdignore
