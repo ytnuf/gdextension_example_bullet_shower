@@ -1,9 +1,16 @@
 
-add_executable("example_exe")
-target_sources("example_exe" PRIVATE
-    "main.cpp"
+add_library("bullet-shower" SHARED)
+target_sources("bullet-shower" PRIVATE
+    "gdexample.cpp" "gdexample.hpp"
+    "register_types.cpp" "register_types.hpp"
 )
 
-target_compile_features("example_exe" PRIVATE "cxx_std_20")
+target_compile_features("bullet-shower" PRIVATE "cxx_std_20")
 
-target_link_libraries("example_exe" PRIVATE "bullet-shower::options")
+find_package("unofficial-godot-cpp" 4.3 REQUIRED CONFIG)
+
+
+target_link_libraries("bullet-shower" 
+    PRIVATE "bullet-shower::options"
+    PRIVATE "unofficial::godot::cpp"
+)
