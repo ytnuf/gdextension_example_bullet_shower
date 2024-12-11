@@ -9,6 +9,11 @@ out/
 CMakeUserPresets.json
 compile_commands.json
 
+# Godot 4+ specific ignores
+.godot/
+/android/
+export_presets.cfg
+
 # Hidden files
 .*
 !.astylerc
