@@ -1,0 +1,90 @@
+{
+    "version": 8,
+    "configurePresets": [
+        {
+            "name": ".base",
+            "hidden": true,
+            "binaryDir": "${sourceDir}/build/default",
+            "cacheVariables": {
+                "CMAKE_COLOR_DIAGNOSTICS": {
+                    "type": "BOOL",
+                    "value": "ON"
+                },
+                "CMAKE_EXPORT_COMPILE_COMMANDS": {
+                    "type": "BOOL",
+                    "value": "ON"
+                },
+                "CMAKE_TOOLCHAIN_FILE": {
+                    "type": "FILEPATH",
+                    "value": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+                },
+                "ENABLE_ADDITIONAL_WARNINGS": {
+                    "type": "BOOL",
+                    "value": "ON"
+                }
+            }
+        },
+        {
+            "name": ".debug",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": {
+                    "type": "STRING",
+                    "value": "Debug"
+                },
+                "ENABLE_UNDEFINED_BEHAVIOUR_SANTISER": {
+                    "type": "BOOL",
+                    "value": "ON"
+                }
+            }
+        },
+        {
+            "name": ".release",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": {
+                    "type": "STRING",
+                    "value": "Release"
+                }
+            }
+        },
+        {
+            "name": ".gcc",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": {
+                    "type": "STRING",
+                    "value": "gcc"
+                },
+                "CMAKE_CXX_COMPILER": {
+                    "type": "STRING",
+                    "value": "g++"
+                }
+            }
+        },
+        {
+            "name": "debug-gcc-ninja-linux-x64-single",
+            "hidden": false,
+            "displayName": "Debug [GCC][Ninja][Linux x86_64][Single-Precision]",
+            "description": "Debug build with g++ and ninja, for Linux x86_64 systems with single-precision floats",
+            "binaryDir": "${sourceDir}/build/debug-gcc-ninja-linux-x64-single",
+            "generator": "Ninja",
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Linux"
+            },
+            "inherits": [
+                ".base",
+                ".debug",
+                ".gcc"
+            ]
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "debug-gcc-ninja-linux-x64-single",
+            "configurePreset": "debug-gcc-ninja-linux-x64-single"
+        }
+    ]
+}
