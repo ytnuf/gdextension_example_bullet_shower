@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://c78by7hc4fmwx"]
 
-[ext_resource type="Script" path="res://demo/bullets.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://bcoiuym4nw1ua" path="res://demo/bullet.png" id="1_u6t60"]
 [ext_resource type="Texture2D" uid="uid://d3u7k0742d5ug" path="res://demo/face_happy.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://8j32onnr4qo3" path="res://demo/face_sad.png" id="4"]
 [ext_resource type="Script" path="res://demo/player.gd" id="5"]
@@ -24,8 +24,8 @@ radius = 27.0
 
 [node name="Shower" type="Node2D"]
 
-[node name="Bullets" type="Node2D" parent="."]
-script = ExtResource("2")
+[node name="Bullets" type="Bullets" parent="."]
+bullet_image = ExtResource("1_u6t60")
 
 [node name="Player" type="Area2D" parent="."]
 script = ExtResource("5")
