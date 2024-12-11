@@ -1,9 +1,11 @@
 
 #include "register_types.hpp"
 
+#include "bullets.hpp"
 #include "gdexample.hpp"
 
 #include <gdextension_interface.h>
+
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/godot.hpp>
 
@@ -19,6 +21,7 @@ void initialise_bullet_shower_module(ModuleInitializationLevel p_level) {
         return;
 
     GDREGISTER_CLASS(GDExample);
+    GDREGISTER_CLASS(Bullets);
 }
 
 void uninitialise_bullet_shower_module(ModuleInitializationLevel p_level) {
