@@ -3,6 +3,7 @@
 
 #include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/classes/physics_server2d.hpp>
+#include <godot_cpp/classes/resource_loader.hpp>
 #include <godot_cpp/classes/world2d.hpp>
 #include <godot_cpp/variant/rid.hpp>
 #include <godot_cpp/variant/transform2d.hpp>
@@ -37,6 +38,7 @@ void Bullets::_ready() {
         return;
 
     auto& physics_server = *godot::PhysicsServer2D::get_singleton();
+    m_bullet_image = godot::ResourceLoader::get_singleton()->load("res://demo/bullet.png");
 
     m_shape = physics_server.circle_shape_create();
     // Set the collision shape's radius for each bullet in pixels.
@@ -115,22 +117,5 @@ void Bullets::_exit_tree() {
     m_bullets.clear();
 }
 
-
-[[nodiscard]] godot::Ref<godot::Texture2D> Bullets::get_bullet_image() const {
-    return m_bullet_image;
-}
-
-void Bullets::set_bullet_image(const godot::Ref<godot::Texture2D>& bullet_image_) {
-    m_bullet_image = bullet_image_;
-}
-
 void Bullets::_bind_methods() {
-    using namespace godot;
-
-    ClassDB::bind_method(D_METHOD("set_bullet_image", "bullet_image_"), &Bullets::set_bullet_image);
-    ClassDB::bind_method(D_METHOD("get_bullet_image"), &Bullets::get_bullet_image);
-    ADD_PROPERTY(
-        PropertyInfo(Variant::OBJECT, "bullet_image", PROPERTY_HINT_RESOURCE_TYPE, "Texture2D"),
-        "set_bullet_image", "get_bullet_image"
-    );
 }

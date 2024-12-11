@@ -25,9 +25,6 @@ public:
     void _draw() override;
     void _exit_tree() override;
 
-    [[nodiscard]] godot::Ref<godot::Texture2D> get_bullet_image() const;
-    void set_bullet_image(const godot::Ref<godot::Texture2D>& bullet_image_);
-
 protected:
     static void _bind_methods();
 
