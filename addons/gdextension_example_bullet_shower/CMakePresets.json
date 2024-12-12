@@ -4,7 +4,8 @@
         {
             "name": ".base",
             "hidden": true,
-            "binaryDir": "${sourceDir}/build/default",
+            "binaryDir": "${sourceDir}/build/${presetName}/",
+            "installDir": "${sourceDir}/install/",
             "cacheVariables": {
                 "CMAKE_COLOR_DIAGNOSTICS": {
                     "type": "BOOL",
@@ -35,10 +36,6 @@
                 "CMAKE_BUILD_TYPE": {
                     "type": "STRING",
                     "value": "Debug"
-                },
-                "ENABLE_UNDEFINED_BEHAVIOUR_SANTISER": {
-                    "type": "BOOL",
-                    "value": "ON"
                 }
             }
         },
@@ -50,6 +47,24 @@
                     "type": "STRING",
                     "value": "Release"
                 }
+            }
+        },
+        {
+            "name": ".ubsan",
+            "hidden": true,
+            "cacheVariables": {
+                "ENABLE_UNDEFINED_BEHAVIOUR_SANTISER": {
+                    "type": "BOOL",
+                    "value": "ON"
+                }
+            }
+        },
+        {
+            "name": ".ninja",
+            "hidden": true,
+            "generator": "Ninja",
+            "environment": {
+                "NINJA_STATUS": "%p [%es] (%f/%t)  -"
             }
         },
         {
@@ -72,7 +87,6 @@
             "displayName": "Debug [GCC][Ninja][Linux x86_64][Single-Precision]",
             "description": "Debug build with g++ and ninja, for Linux x86_64 systems with single-precision floats",
             "binaryDir": "${sourceDir}/build/debug-gcc-ninja-linux-x64-single",
-            "generator": "Ninja",
             "condition": {
                 "type": "equals",
                 "lhs": "${hostSystemName}",
@@ -81,6 +95,8 @@
             "inherits": [
                 ".base",
                 ".debug",
+                ".ubsan",
+                ".ninja",
                 ".gcc"
             ]
         },
@@ -90,7 +106,6 @@
             "displayName": "Release [GCC][Ninja][Linux x86_64][Single-Precision]",
             "description": "Release build with g++ and ninja, for Linux x86_64 systems with single-precision floats",
             "binaryDir": "${sourceDir}/build/release-gcc-ninja-linux-x64-single",
-            "generator": "Ninja",
             "condition": {
                 "type": "equals",
                 "lhs": "${hostSystemName}",
@@ -99,6 +114,7 @@
             "inherits": [
                 ".base",
                 ".release",
+                ".ninja",
                 ".gcc"
             ]
         }
