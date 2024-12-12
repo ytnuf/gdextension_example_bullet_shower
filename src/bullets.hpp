@@ -19,6 +19,11 @@ public:
     void _draw() override;
     void _exit_tree() override;
 
+protected:
+    // This is required to build
+    static void _bind_methods() {
+    }
+
 private:
     struct BulletData {
         godot::Vector2 position{};
