@@ -1,0 +1,8 @@
+[configuration]
+entry_symbol = "bullet_shower_init"
+compatibility_minimum = "4.3"
+reloadable = true
+
+[libraries]
+linux.debug.x86_64.single = "res://addons/gdextension_example_bullet_shower/build/debug-gcc-ninja-linux-x64-single/lib/libbulletshower.linux.x86_64.d.so"
+linux.release.x86_64.single = "res://addons/gdextension_example_bullet_shower/build/release-gcc-ninja-linux-x64-single/lib/libbulletshower.linux.x86_64.so"
