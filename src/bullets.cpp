@@ -38,14 +38,14 @@ void Bullets::_ready() {
         return;
 
     auto& physics_server = *godot::PhysicsServer2D::get_singleton();
-    m_bullet_image = godot::ResourceLoader::get_singleton()->load("res://demo/bullet.png");
+    m_texture = godot::ResourceLoader::get_singleton()->load("res://demo/bullet.png");
 
     m_shape = physics_server.circle_shape_create();
     // Set the collision shape's radius for each bullet in pixels.
     physics_server.shape_set_data(m_shape, 8);
 
     for(int i=0; i<BULLET_COUNT; ++i) {
-        Bullet bullet;
+        BulletData bullet;
         // Give each bullet its own random speed.
         bullet.speed = randf_range(SPEED_MIN, SPEED_MAX);
         bullet.body = physics_server.body_create();
@@ -65,7 +65,7 @@ void Bullets::_ready() {
         transform2d.set_origin(bullet.position);
         physics_server.body_set_state(bullet.body, godot::PhysicsServer2D::BODY_STATE_TRANSFORM, transform2d);
 
-        m_bullets.push_back(bullet);
+        m_bullet_lst.push_back(bullet);
     }
 }
 
@@ -84,7 +84,7 @@ void Bullets::_physics_process(double dt) {
     godot::Transform2D transform2d;
     const auto offset = get_viewport_rect().size.x + 16.0;
 
-    for(Bullet& bullet : m_bullets) {
+    for(BulletData& bullet : m_bullet_lst) {
         bullet.position.x -= bullet.speed * dt;
         if(bullet.position.x < -16.0) {
             // Move the bullet back to the right when it left the screen.
@@ -99,9 +99,9 @@ void Bullets::_draw() {
     if(godot::Engine::get_singleton()->is_editor_hint() )
         return;
 
-    const auto offset = -m_bullet_image->get_size() * 0.5;
-    for(const Bullet& bullet : m_bullets)
-        draw_texture(m_bullet_image, bullet.position + offset);
+    const auto offset = -m_texture->get_size() * 0.5;
+    for(const BulletData& bullet : m_bullet_lst)
+        draw_texture(m_texture, bullet.position + offset);
 }
 
 void Bullets::_exit_tree() {
@@ -110,9 +110,9 @@ void Bullets::_exit_tree() {
 
     auto& physics_server = *godot::PhysicsServer2D::get_singleton();
 
-    for(Bullet& bullet : m_bullets)
+    for(BulletData& bullet : m_bullet_lst)
         physics_server.free_rid(bullet.body);
 
     physics_server.free_rid(m_shape);
-    m_bullets.clear();
+    m_bullet_lst.clear();
 }

@@ -9,12 +9,6 @@
 
 #include <vector>
 
-struct Bullet {
-    godot::Vector2 position{};
-    real_t speed = 1.0;
-    godot::RID body{};
-};
-
 class Bullets : public godot::Node2D {
     GDCLASS(Bullets, godot::Node2D)
 
@@ -26,9 +20,15 @@ public:
     void _exit_tree() override;
 
 private:
-    godot::Ref<godot::Texture2D> m_bullet_image;
+    struct BulletData {
+        godot::Vector2 position{};
+        real_t speed = 1.0;
+        godot::RID body{};
+    };
+
+    godot::Ref<godot::Texture2D> m_texture;
     godot::RID m_shape;
-    std::vector<Bullet> m_bullets;
+    std::vector<BulletData> m_bullet_lst;
 };
 
 #endif // ifndef HPP_BULLETS_
