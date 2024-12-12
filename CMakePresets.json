@@ -21,6 +21,10 @@
                 "ENABLE_ADDITIONAL_WARNINGS": {
                     "type": "BOOL",
                     "value": "ON"
+                },
+                "PRESET_USED": {
+                    "type": "BOOL",
+                    "value": "ON"
                 }
             }
         },
