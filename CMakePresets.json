@@ -5,7 +5,7 @@
             "name": ".base",
             "hidden": true,
             "binaryDir": "${sourceDir}/build/${presetName}/",
-            "installDir": "${sourceDir}/install/",
+            "installDir": "${sourceDir}/addons/gdextension_example_bullet_shower",
             "cacheVariables": {
                 "CMAKE_COLOR_DIAGNOSTICS": {
                     "type": "BOOL",

@@ -29,3 +29,5 @@ file(TOUCH "${PROJECT_SOURCE_DIR}/build/.gdignore")
 file(TOUCH "${PROJECT_BINARY_DIR}/.gdignore")
 
 add_subdirectory("src/")
+
+include("cmake/install.cmake")
