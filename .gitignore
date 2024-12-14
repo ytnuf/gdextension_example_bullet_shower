@@ -1,8 +1,15 @@
 
 # Build directory
+cmake-build-*/
+build*/
+_build*/
 out/
 
-# Godot 4+ specific ignores
+# CMake
+CMakeUserPresets.json
+compile_commands.json
+
+# Godot
 .godot/
 /android/
 export_presets.cfg
@@ -18,6 +25,14 @@ export_presets.cfg
 !.gitignore
 !.gitmodules
 !.uncrustify.cfg
+
+# Codeblocks
+*.depend
+*.layout
+
+# QT Creator
+*.pro.user*
+CMakeLists.txt.user
 
 # Misc
 *.orig
