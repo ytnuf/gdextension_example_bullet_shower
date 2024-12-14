@@ -9,16 +9,22 @@ target_compile_features("bullet-shower" PRIVATE "cxx_std_20")
 
 find_package("unofficial-godot-cpp" 4.3 REQUIRED CONFIG)
 
-
 target_link_libraries("bullet-shower" 
     PRIVATE "bullet-shower::options"
     PRIVATE "unofficial::godot::cpp"
 )
 
+# Name the output according to the feature flags
 string(TOLOWER "bulletshower.${CMAKE_SYSTEM_NAME}.${CMAKE_SYSTEM_PROCESSOR}" "BULLET_SHOWER_OUTPUT_NAME")
 set_target_properties("bullet-shower" PROPERTIES
     CXX_VISIBILITY_PRESET "hidden"
     DEBUG_POSTFIX ".d"
     OUTPUT_NAME "${BULLET_SHOWER_OUTPUT_NAME}"
     VISIBILITY_INLINES_HIDDEN ON
+)
+
+# Kinda hacky, but the .gdextension file is annoyingly restrictive
+file(COPY_FILE
+    "${PROJECT_SOURCE_DIR}/data/gd.build.in"
+    "${PROJECT_SOURCE_DIR}/build/gdextension_example_bullet_shower.gdextension"
 )

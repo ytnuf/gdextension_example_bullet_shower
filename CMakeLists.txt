@@ -25,7 +25,6 @@ endif()
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/lib")
 
 # Make godot ignore the build directory
-file(TOUCH "${PROJECT_SOURCE_DIR}/build/.gdignore")
 file(TOUCH "${PROJECT_BINARY_DIR}/.gdignore")
 
 add_subdirectory("src/")
