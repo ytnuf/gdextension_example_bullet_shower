@@ -1,7 +1,7 @@
 
 install(TARGETS "bullet-shower"
-    LIBRARY
-        DESTINATION "lib"
+    LIBRARY DESTINATION "lib"
+    RUNTIME DESTINATION "lib"
 )
 
 install(FILES "${PROJECT_SOURCE_DIR}/LICENSE.txt"

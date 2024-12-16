@@ -70,6 +70,11 @@
         {
             "name": ".gcc",
             "hidden": true,
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Linux"
+            },
             "cacheVariables": {
                 "CMAKE_C_COMPILER": {
                     "type": "STRING",
@@ -82,16 +87,24 @@
             }
         },
         {
-            "name": "debug-gcc-ninja-linux-x86_64-single",
+            "name": ".mingw64",
+            "hidden": true,
+            "cacheVariables": {
+                "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": {
+                    "type": "FILEPATH",
+                    "value": "${sourceDir}/cmake/toolchains/mingw64-toolchain.cmake"
+                },
+                "VCPKG_TARGET_TRIPLET": {
+                    "type": "STRING",
+                    "value": "x64-mingw-static"
+                }
+            }
+        },
+        {
+            "name": "debug-gcc-ninja-linux-x86_64",
             "hidden": false,
-            "displayName": "Debug [GCC][Ninja][Linux x86_64][Single-Precision]",
-            "description": "Debug build with g++ and ninja, for Linux x86_64 systems with single-precision floats",
-            "binaryDir": "${sourceDir}/build/debug-gcc-ninja-linux-x64-single",
-            "condition": {
-                "type": "equals",
-                "lhs": "${hostSystemName}",
-                "rhs": "Linux"
-            },
+            "displayName": "Debug [GCC][Ninja][Linux x86_64]",
+            "description": "Debug build with g++ and ninja, for Linux x86_64 systems",
             "inherits": [
                 ".base",
                 ".debug",
@@ -101,32 +114,58 @@
             ]
         },
         {
-            "name": "release-gcc-ninja-linux-x86_64-single",
+            "name": "release-gcc-ninja-linux-x86_64",
             "hidden": false,
-            "displayName": "Release [GCC][Ninja][Linux x86_64][Single-Precision]",
-            "description": "Release build with g++ and ninja, for Linux x86_64 systems with single-precision floats",
-            "binaryDir": "${sourceDir}/build/release-gcc-ninja-linux-x64-single",
-            "condition": {
-                "type": "equals",
-                "lhs": "${hostSystemName}",
-                "rhs": "Linux"
-            },
+            "displayName": "Release [GCC][Ninja][Linux x86_64]",
+            "description": "Release build with g++ and ninja, for Linux x86_64 systems",
             "inherits": [
                 ".base",
                 ".release",
                 ".ninja",
                 ".gcc"
             ]
+        },
+        {
+            "name": "debug-mingw64-ninja-x86_64",
+            "hidden": false,
+            "displayName": "Debug [MinGW-w64][Ninja][Windows x86_64 Target]",
+            "description": "Debug build with g++ and ninja, for Windows x86_64 systems",
+            "inherits": [
+                ".base",
+                ".debug",
+                ".ninja",
+                ".mingw64"
+            ]
+        },
+        {
+            "name": "release-mingw64-ninja-x86_64",
+            "hidden": false,
+            "displayName": "Release [MinGW-w64][Ninja][Windows x86_64 Target]",
+            "description": "Release build with g++ and ninja, for Windows x86_64 systems",
+            "inherits": [
+                ".base",
+                ".release",
+                ".ninja",
+                ".mingw64"
+            ]
         }
     ],
     "buildPresets": [
         {
-            "name": "debug-gcc-ninja-linux-x86_64-single",
-            "configurePreset": "debug-gcc-ninja-linux-x86_64-single"
+            "name": "debug-gcc-ninja-linux-x86_64",
+            "configurePreset": "debug-gcc-ninja-linux-x86_64"
         },
         {
-            "name": "release-gcc-ninja-linux-x86_64-single",
-            "configurePreset": "release-gcc-ninja-linux-x86_64-single"
+            "name": "release-gcc-ninja-linux-x86_64",
+            "configurePreset": "release-gcc-ninja-linux-x86_64"
+        },
+        {
+            "name": "debug-mingw64-ninja-x86_64",
+            "configurePreset": "debug-mingw64-ninja-x86_64"
+        },
+        {
+            "name": "release-mingw64-ninja-x86_64",
+            "configurePreset": "release-mingw64-ninja-x86_64"
         }
     ]
 }

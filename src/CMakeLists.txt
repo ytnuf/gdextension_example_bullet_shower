@@ -17,10 +17,13 @@ target_link_libraries("bullet-shower"
 # Name the output according to the feature flags
 string(TOLOWER "bulletshower.${CMAKE_SYSTEM_NAME}.${CMAKE_SYSTEM_PROCESSOR}" "BULLET_SHOWER_OUTPUT_NAME")
 set_target_properties("bullet-shower" PROPERTIES
-    CXX_VISIBILITY_PRESET "hidden"
-    DEBUG_POSTFIX ".d"
-    OUTPUT_NAME "${BULLET_SHOWER_OUTPUT_NAME}"
-    VISIBILITY_INLINES_HIDDEN ON
+    ARCHIVE_OUTPUT_DIRECTORY    "${PROJECT_BINARY_DIR}/lib"
+    CXX_VISIBILITY_PRESET       "hidden"
+    DEBUG_POSTFIX               ".d"
+    LIBRARY_OUTPUT_DIRECTORY    "${PROJECT_BINARY_DIR}/lib"
+    OUTPUT_NAME                 "${BULLET_SHOWER_OUTPUT_NAME}"
+    RUNTIME_OUTPUT_DIRECTORY    "${PROJECT_BINARY_DIR}/lib"
+    VISIBILITY_INLINES_HIDDEN   ON
 )
 
 # Kinda hacky, but the .gdextension file is annoyingly restrictive
