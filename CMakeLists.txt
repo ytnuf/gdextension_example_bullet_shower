@@ -22,6 +22,8 @@ endif()
 # Make godot ignore the build directory
 file(TOUCH "${PROJECT_BINARY_DIR}/.gdignore")
 
+include("cmake/gdextension.cmake")
+
 add_subdirectory("src/")
 
 include("cmake/install.cmake")

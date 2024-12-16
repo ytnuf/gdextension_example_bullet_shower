@@ -10,14 +10,14 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang
 endif()
 
 
-add_library("bullet-shower-options" INTERFACE)
-add_library("bullet-shower::options" ALIAS "bullet-shower-options")
+add_library("project-options" INTERFACE)
+add_library("project::options" ALIAS "project-options")
 
 
 if(ENABLE_ADDITIONAL_WARNINGS)
     if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
         #GCC and Clang share these warnings
-        target_compile_options("bullet-shower-options" INTERFACE
+        target_compile_options("project-options" INTERFACE
             "-Wall"
             "-Wextra"
             "-Wpedantic"
@@ -45,7 +45,7 @@ if(ENABLE_ADDITIONAL_WARNINGS)
         )
         #Clang has additional warnings
         if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-            target_compile_options("bullet-shower-options" INTERFACE
+            target_compile_options("project-options" INTERFACE
                 "-Wcovered-switch-default"
                 "-Wdeprecated"
                 "-Wdeprecated-copy"
@@ -65,15 +65,15 @@ endif()
 
 if(ENABLE_UNDEFINED_BEHAVIOUR_SANTISER)
     if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-        target_compile_options("bullet-shower-options" INTERFACE "-fsanitize=undefined")
-        target_link_options("bullet-shower-options" INTERFACE "-fsanitize=undefined")
+        target_compile_options("project-options" INTERFACE "-fsanitize=undefined")
+        target_link_options("project-options" INTERFACE "-fsanitize=undefined")
     endif()
 endif()
 
 if(ENABLE_ADDRESS_SANTISER)
     if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-        target_compile_options("bullet-shower-options" INTERFACE "-fsanitize=address")
-        target_link_options("bullet-shower-options" INTERFACE "-fsanitize=address")
+        target_compile_options("project-options" INTERFACE "-fsanitize=address")
+        target_link_options("project-options" INTERFACE "-fsanitize=address")
     else()
         message(AUTHOR_WARNING "TODO: Enable MSVC flags for ASAN")
     endif()

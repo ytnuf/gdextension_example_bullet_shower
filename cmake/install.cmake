@@ -1,5 +1,5 @@
 
-install(TARGETS "bullet-shower"
+install(TARGETS "${PROJECT_NAME}"
     LIBRARY DESTINATION "lib"
     RUNTIME DESTINATION "lib"
 )
