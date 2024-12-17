@@ -1,6 +1,8 @@
 
 cmake_minimum_required(VERSION 3.30)
 
+include("cmake/pre_project.cmake")
+
 project("gdextension_example_bullet_shower")
 
 get_property(IS_MULTICONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)

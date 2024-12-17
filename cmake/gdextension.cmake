@@ -9,8 +9,6 @@
 # This prevents e.g. having a clang and gcc build for linux.x86_64.debug feature set
 # Generating them allows .gdextension to point to the latest configuration
 
-set(UPPER_BUILD_FOLDER "${PROJECT_SOURCE_DIR}/build")
-
 set(GDEXTENSION_ENTRY_SYMBOL "bullet_shower_init")
 set(GDEXTENSION_VERSION_MINIMUM "4.3")
 set(GDEXTENSION_VERSION_MAXIMUM "${GDEXTENSION_VERSION_MINIMUM}")
@@ -73,7 +71,6 @@ function(reconfigure_gdextension_file GDEXTENSION_FILENAME FEATURE_TAG)
         file(WRITE "${GDEXTENSION_FILENAME}" "${GDEXTENSION_CONFIG}")
     endforeach()
 endfunction()
-
 
 if(NOT EXISTS "${UPPER_BUILD_FOLDER}/${PROJECT_NAME}.build.gdextension")
     create_gdextension_file("${UPPER_BUILD_FOLDER}/.install.gdextension")
