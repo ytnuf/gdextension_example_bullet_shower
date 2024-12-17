@@ -50,6 +50,16 @@
             }
         },
         {
+            "name": ".multi",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_CONFIGURATION_TYPES": {
+                    "type": "STRING",
+                    "value": "Debug;Release"
+                }
+            }
+        },
+        {
             "name": ".ubsan",
             "hidden": true,
             "cacheVariables": {

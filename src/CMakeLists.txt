@@ -17,14 +17,13 @@ target_link_libraries("${PROJECT_NAME}"
 # Name the output according to the feature flags
 string(TOLOWER "${CMAKE_SYSTEM_NAME}.${CMAKE_SYSTEM_PROCESSOR}" FEATURE_FLAGS)
 set_target_properties("${PROJECT_NAME}" PROPERTIES
-    ARCHIVE_OUTPUT_DIRECTORY    "${PROJECT_BINARY_DIR}/lib"
+    ARCHIVE_OUTPUT_DIRECTORY    "$<1:${PROJECT_BINARY_DIR}/lib>"
     CXX_VISIBILITY_PRESET       "hidden"
     DEBUG_POSTFIX               ".d"
-    LIBRARY_OUTPUT_DIRECTORY    "${PROJECT_BINARY_DIR}/lib"
+    LIBRARY_OUTPUT_DIRECTORY    "$<1:${PROJECT_BINARY_DIR}/lib>"
     OUTPUT_NAME                 "${PROJECT_NAME}.${FEATURE_FLAGS}"
-    RUNTIME_OUTPUT_DIRECTORY    "${PROJECT_BINARY_DIR}/lib"
+    RUNTIME_OUTPUT_DIRECTORY    "$<1:${PROJECT_BINARY_DIR}/lib>"
     VISIBILITY_INLINES_HIDDEN   ON
 )
-
 # Kinda hacky, but the .gdextension file is annoyingly restrictive
 reconfigure_gdextension_file("${UPPER_BUILD_FOLDER}/${PROJECT_NAME}.build.gdextension" "${FEATURE_FLAGS}")
