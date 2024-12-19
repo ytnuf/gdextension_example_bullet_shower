@@ -5,7 +5,7 @@ target_sources("${PROJECT_NAME}" PRIVATE
     "register_types.cpp" "register_types.hpp"
 )
 
-target_compile_features("${PROJECT_NAME}" PRIVATE "cxx_std_20")
+target_compile_features("${PROJECT_NAME}" PRIVATE "cxx_std_17")
 
 find_package("unofficial-godot-cpp" 4.3 REQUIRED CONFIG)
 
