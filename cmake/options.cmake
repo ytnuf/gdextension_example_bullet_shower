@@ -9,6 +9,8 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang
     option(ENABLE_UNDEFINED_BEHAVIOUR_SANTISER "Turn on sanitiser for undefined behaviour" OFF)
 endif()
 
+option(ALWAYS_RECREATE_GDEXTENSION_FILE "Always recreate the .gdextension file from scratch on configuration" OFF)
+
 
 add_library("project-options" INTERFACE)
 add_library("project::options" ALIAS "project-options")
