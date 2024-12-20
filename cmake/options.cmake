@@ -11,6 +11,11 @@ endif()
 
 option(ALWAYS_RECREATE_GDEXTENSION_FILE "Always recreate the .gdextension file from scratch on configuration" OFF)
 
+set(LIBDIR "lib" CACHE STRING "Name of folder to place the shared libraries")
+set(DEBUG_SUFFIX ".d" CACHE STRING "The suffix at the end of a debug library's name")
+
+string(TOLOWER "${CMAKE_SYSTEM_NAME}.${CMAKE_SYSTEM_PROCESSOR}" _GDEXTENSION_TARGET_PLATFORM_)
+set(GDEXTENSION_TARGET_PLATFORM "${_GDEXTENSION_TARGET_PLATFORM_}" CACHE STRING "The platform this gdextension is targetted for")
 
 add_library("project-options" INTERFACE)
 add_library("project::options" ALIAS "project-options")
