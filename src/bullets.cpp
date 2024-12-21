@@ -3,7 +3,6 @@
 
 #include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/classes/physics_server2d.hpp>
-#include <godot_cpp/classes/random_number_generator.hpp>
 #include <godot_cpp/classes/resource_loader.hpp>
 #include <godot_cpp/classes/world2d.hpp>
 #include <godot_cpp/variant/rid.hpp>
@@ -21,15 +20,13 @@ constexpr int BULLET_COUNT = 500;
 constexpr int SPEED_MIN = 20;
 constexpr int SPEED_MAX = 80;
 
-double randf_range(double from, double to) {
-    static godot::RandomNumberGenerator s_rng = [](){
-        std::random_device rd;
-        const uint64_t seed = (static_cast<uint64_t>(rd() ) << 32) | rd();
-        godot::RandomNumberGenerator rng_;
-        rng_.set_seed(seed);
-        return rng_;
-    }();
-    return s_rng.randf_range(from, to);
+// Do note this is slightly different from gdscript's randf_range
+// As the output range is half-open
+// And a difference of random engine
+real_t randf_range(real_t from, real_t to) {
+    static std::default_random_engine rng{std::random_device{}()};
+    std::uniform_real_distribution dist{from, to};
+    return dist(rng);
 }
 
 
