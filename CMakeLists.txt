@@ -24,9 +24,9 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
 endif()
 
 # Make godot ignore the build directory
-file(TOUCH "${PROJECT_BINARY_DIR}/.gdignore")
-
-include("cmake/gdextension.cmake")
+if(NOT UPPER_BUILD_FOLDER STREQUAL PROJECT_BINARY_DIR)
+    file(TOUCH "${PROJECT_BINARY_DIR}/.gdignore")
+endif()
 
 add_subdirectory("src/")
 

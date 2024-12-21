@@ -1,7 +1,7 @@
 
 # These variables should be set by presets
 option(USE_VCPKG "Fetch vcpkg if not found" ON)
-set(UPPER_BUILD_FOLDER "${CMAKE_SOURCE_DIR}/build" CACHE PATH "The folders that contains the various build folders")
+set(UPPER_BUILD_FOLDER "${CMAKE_SOURCE_DIR}/build" CACHE PATH "The shared folder that contains the various configurations build folders")
 
 # Note: CMAKE_TOOLCHAIN_FILE must be set before the project() call
 function(obtain_vcpkg)

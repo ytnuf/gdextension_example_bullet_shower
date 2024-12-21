@@ -1,4 +1,6 @@
 
+include("${PROJECT_SOURCE_DIR}/cmake/gdextension.cmake")
+
 add_gdextension_library("${PROJECT_NAME}"
     GDEXTENSION_ENTRY_SYMBOL "bullet_shower_init"
     GDEXTENSION_VERSION_MINIMUM "4.3"
