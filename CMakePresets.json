@@ -111,6 +111,28 @@
             }
         },
         {
+            "name": ".emscripten",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_PROJECT_INCLUDE": {
+                    "type": "FILEPATH",
+                    "value": "${sourceDir}/cmake/toolchains/emscripten-overwrite.cmake"
+                },
+                "GDEXTENSION_TARGET_PLATFORM": {
+                    "type": "STRING",
+                    "value": "web.wasm32"
+                },
+                "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": {
+                    "type": "FILEPATH",
+                    "value": "$env{EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake"
+                },
+                "VCPKG_TARGET_TRIPLET": {
+                    "type": "STRING",
+                    "value": "wasm32-emscripten"
+                }
+            }
+        },
+        {
             "name": "debug-gcc-ninja-linux-x86_64",
             "hidden": false,
             "displayName": "Debug [GCC][Ninja][Linux x86_64]",
@@ -158,6 +180,30 @@
                 ".ninja",
                 ".mingw64"
             ]
+        },
+        {
+            "name": "debug-emscripten-ninja-web",
+            "hidden": false,
+            "displayName": "Debug [Emscripten][Ninja][Web Target]",
+            "description": "Debug build with emc++ and ninja, for Web target",
+            "inherits": [
+                ".base",
+                ".debug",
+                ".ninja",
+                ".emscripten"
+            ]
+        },
+        {
+            "name": "release-emscripten-ninja-web",
+            "hidden": false,
+            "displayName": "Release [Emscripten][Ninja][Web Target]",
+            "description": "Release build with emc++ and ninja, for Web target",
+            "inherits": [
+                ".base",
+                ".release",
+                ".ninja",
+                ".emscripten"
+            ]
         }
     ],
     "buildPresets": [
@@ -176,6 +222,14 @@
         {
             "name": "release-mingw64-ninja-x86_64",
             "configurePreset": "release-mingw64-ninja-x86_64"
+        },
+        {
+            "name": "debug-emscripten-ninja-web",
+            "configurePreset": "debug-emscripten-ninja-web"
+        },
+        {
+            "name": "release-emscripten-ninja-web",
+            "configurePreset": "release-emscripten-ninja-web"
         }
     ]
 }
