@@ -26,10 +26,14 @@ function(add_gdextension_library TARGET_NAME)
         VISIBILITY_INLINES_HIDDEN   ON
     )
 
-    _create_gdextension_file(${ARGV})
+    set(BUILD_GDEXTENSION_FILE "${UPPER_BUILD_FOLDER}/${TARGET_NAME}.build.gdextension")
+    set(INSTALL_GDEXTENSION_FILE "${UPPER_BUILD_FOLDER}/.install.${TARGET_NAME}.gdextension")
+    if( (NOT EXISTS "${BUILD_GDEXTENSION_FILE}") OR (NOT EXISTS "${INSTALL_GDEXTENSION_FILE}") )
+        _create_gdextension_file(${ARGV})
+    endif()
 
-    _gdextension_regenerate_library_path("${TARGET_NAME}" "${UPPER_BUILD_FOLDER}/${TARGET_NAME}.build.gdextension" "${PROJECT_BINARY_DIR}/${LIBDIR}")
-    _gdextension_regenerate_library_path("${TARGET_NAME}" "${UPPER_BUILD_FOLDER}/.install.${TARGET_NAME}.gdextension" "res://addons/${PROJECT_NAME}/${LIBDIR}")
+    _gdextension_regenerate_library_path("${TARGET_NAME}" "${BUILD_GDEXTENSION_FILE}" "${PROJECT_BINARY_DIR}/${LIBDIR}")
+    _gdextension_regenerate_library_path("${TARGET_NAME}" "${INSTALL_GDEXTENSION_FILE}" "res://addons/${PROJECT_NAME}/${LIBDIR}")
 endfunction()
 
 # Initial creation of the .gdextension file
