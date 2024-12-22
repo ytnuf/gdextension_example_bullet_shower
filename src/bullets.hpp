@@ -27,7 +27,7 @@ protected:
 private:
     struct BulletData {
         godot::Vector2 position{};
-        real_t speed = 1.0;
+        double speed = 1.0;
         godot::RID body{};
     };
 
