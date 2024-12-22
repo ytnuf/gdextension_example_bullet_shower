@@ -5,8 +5,6 @@ include("cmake/pre_project.cmake")
 
 project("gdextension_example_bullet_shower")
 
-get_property(IS_MULTICONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
-
 include("cmake/options.cmake")
 
 if(NOT PRESET_USED)
@@ -30,4 +28,6 @@ endif()
 
 add_subdirectory("src/")
 
-include("cmake/install.cmake")
+install(FILES "${PROJECT_SOURCE_DIR}/LICENSE.txt"
+    DESTINATION "."
+)

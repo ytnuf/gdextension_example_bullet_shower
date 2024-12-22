@@ -1,5 +1,5 @@
 
-# This function creates a gdextension library with its respective .gdextension file:
+# This function creates an installable gdextension library with its respective .gdextension file:
 #   add_gdextension_library(<target_name_arg>
 #       GDEXTENSION_ENTRY_SYMBOL <entry_symbol_arg>
 #       GDEXTENSION_VERSION_MINIMUM <version_minimum_arg>
@@ -12,28 +12,42 @@ function(add_gdextension_library TARGET_NAME)
         message(FATAL_ERROR "add_gdextension_library: target hasn't been set")
     endif()
 
+    # Create the library (MODULE is like shared but more suitable for plugins, unrelated to C++ modules)
     add_library("${TARGET_NAME}" MODULE)
     set_target_properties("${TARGET_NAME}" PROPERTIES
-        ARCHIVE_OUTPUT_DIRECTORY    "$<1:${PROJECT_BINARY_DIR}/${LIBDIR}>"
+        ARCHIVE_OUTPUT_DIRECTORY    "$<1:${PROJECT_BINARY_DIR}/lib>"
         CXX_VISIBILITY_PRESET       "hidden"
-        DEBUG_POSTFIX               "${DEBUG_SUFFIX}"
-        LIBRARY_OUTPUT_DIRECTORY    "$<1:${PROJECT_BINARY_DIR}/${LIBDIR}>"
+        DEBUG_POSTFIX               ".debug"
+        LIBRARY_OUTPUT_DIRECTORY    "$<1:${PROJECT_BINARY_DIR}/lib>"
         OUTPUT_NAME                 "${TARGET_NAME}.${GDEXTENSION_TARGET_PLATFORM}"
         PREFIX                      "${CMAKE_SHARED_LIBRARY_PREFIX}"
-        RUNTIME_OUTPUT_DIRECTORY    "$<1:${PROJECT_BINARY_DIR}/${LIBDIR}>"
-        RUNTIME_OUTPUT_DIRECTORY    "$<1:${PROJECT_BINARY_DIR}/${LIBDIR}>"
+        RUNTIME_OUTPUT_DIRECTORY    "$<1:${PROJECT_BINARY_DIR}/lib>"
         SUFFIX                      "${CMAKE_SHARED_LIBRARY_SUFFIX}"
         VISIBILITY_INLINES_HIDDEN   ON
     )
 
+    # Create the .gdextension files if it doesn't exist
     set(BUILD_GDEXTENSION_FILE "${UPPER_BUILD_FOLDER}/${TARGET_NAME}.build.gdextension")
     set(INSTALL_GDEXTENSION_FILE "${UPPER_BUILD_FOLDER}/.install.${TARGET_NAME}.gdextension")
     if( (NOT EXISTS "${BUILD_GDEXTENSION_FILE}") OR (NOT EXISTS "${INSTALL_GDEXTENSION_FILE}") )
         _create_gdextension_file(${ARGV})
     endif()
 
-    _gdextension_regenerate_library_path("${TARGET_NAME}" "${BUILD_GDEXTENSION_FILE}" "${PROJECT_BINARY_DIR}/${LIBDIR}")
-    _gdextension_regenerate_library_path("${TARGET_NAME}" "${INSTALL_GDEXTENSION_FILE}" "res://addons/${PROJECT_NAME}/${LIBDIR}")
+    # Regenerate the gdextension library paths to the latests cmake configuration
+    include("GNUInstallDirs")
+    _gdextension_regenerate_library_path("${TARGET_NAME}" "${BUILD_GDEXTENSION_FILE}" "${PROJECT_BINARY_DIR}/lib")
+    _gdextension_regenerate_library_path("${TARGET_NAME}" "${INSTALL_GDEXTENSION_FILE}" "res://addons/${PROJECT_NAME}/${CMAKE_INSTALL_LIBDIR}")
+
+    # Make the library and the .gdextension file installable
+    install(TARGETS "${TARGET_NAME}"
+        ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+        LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+        RUNTIME DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+    )
+    install(FILES "${INSTALL_GDEXTENSION_FILE}"
+        DESTINATION "."
+        RENAME "${TARGET_NAME}.gdextension"
+    )
 endfunction()
 
 # Initial creation of the .gdextension file
@@ -58,7 +72,7 @@ function(_create_gdextension_file TARGET_NAME)
         set(arg_GDEXTENSION_VERSION_MAXIMUM "${arg_GDEXTENSION_VERSION_MINIMUM}")
     endif()
 
-    # Create the configuration section of the gdextension configuration
+    # Create the configuration section of the gdextension file
     string(CONCAT CONFIGURATION_SECTION
         "[configuration]\n"
         "entry_symbol = \"${arg_GDEXTENSION_ENTRY_SYMBOL}\"\n"
@@ -66,7 +80,7 @@ function(_create_gdextension_file TARGET_NAME)
         "compatibility_maximum = \"${arg_GDEXTENSION_VERSION_MAXIMUM}\"\n"
     )
 
-    # Create the default library section of the gdextension configuration
+    # Create the default library section of the gdextension file
     set(LIBRARY_SECTION "[libraries]\n")
     foreach(PLATFORM IN LISTS arg_SUPPORTED_PLAFORMS)
         if(PLATFORM MATCHES "^linux")
@@ -74,8 +88,9 @@ function(_create_gdextension_file TARGET_NAME)
         elseif(PLATFORM MATCHES "^windows")
             set(OUTPUT_SUFFIX ".dll")
         endif()
-        set(RELEASE_PATH "${PLATFORM}.release = \"res://addons/${PROJECT_NAME}/${LIBDIR}/${CMAKE_SHARED_LIBRARY_PREFIX}${PROJECT_NAME}.${PLATFORM}${OUTPUT_SUFFIX}\"")
-        set(DEBUG_PATH "${PLATFORM}.debug = \"res://addons/${PROJECT_NAME}/${LIBDIR}/${CMAKE_SHARED_LIBRARY_PREFIX}${PROJECT_NAME}.${PLATFORM}${DEBUG_SUFFIX}${OUTPUT_SUFFIX}\"")
+        get_target_property(OUTPUT_PREFIX "${TARGET_NAME}" PREFIX)
+        set(RELEASE_PATH "${PLATFORM}.release = \"res://addons/${PROJECT_NAME}/lib/${OUTPUT_PREFIX}${PROJECT_NAME}.${PLATFORM}${OUTPUT_SUFFIX}\"")
+        set(DEBUG_PATH "${PLATFORM}.debug = \"res://addons/${PROJECT_NAME}/lib/${OUTPUT_PREFIX}${PROJECT_NAME}.${PLATFORM}.debug${OUTPUT_SUFFIX}\"")
         set(LIBRARY_SECTION "${LIBRARY_SECTION}${RELEASE_PATH}\n${DEBUG_PATH}\n")
     endforeach()
 
@@ -99,6 +114,7 @@ function(_gdextension_regenerate_library_path TARGET_NAME GDEXTENSION_FILENAME L
     # (due to an annoying limitation of cmake lists, this doesn't handle semi-colons well)
     file(STRINGS "${GDEXTENSION_FILENAME}" GDEXTENSION_CONFIG)
     # Handle the difference between single and multi config by putting the configs in a list
+    get_property(IS_MULTICONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
     if(IS_MULTICONFIG)
         string(TOLOWER "${CMAKE_CONFIGURATION_TYPES}" LOWERCASE_CONFIG_LST)
     else()
