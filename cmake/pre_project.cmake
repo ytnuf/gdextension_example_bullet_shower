@@ -1,7 +1,7 @@
 
 # These variables should be set by presets
 option(USE_VCPKG "Fetch vcpkg if not found" ON)
-set(UPPER_BUILD_FOLDER "${CMAKE_SOURCE_DIR}/build" CACHE PATH "The shared folder that contains the various configurations build folders")
+set(SHARED_BUILD_FOLDER "${CMAKE_SOURCE_DIR}/build/_shared" CACHE PATH "The folder that contains files that are shared amongst build configurations")
 
 # Note: CMAKE_TOOLCHAIN_FILE must be set before the project() call
 function(obtain_vcpkg)
@@ -18,19 +18,18 @@ function(obtain_vcpkg)
         if(NOT EXISTS "${PATH_TO_VCPKG_}")
             message(STATUS "Cannot find vcpkg, falling back to FetchContent")
             include("FetchContent")
-            set(FETCHED_VCPKG_DIR "${UPPER_BUILD_FOLDER}/fetched/vcpkg")
+            set(FETCHED_VCPKG_DIR_ "${SHARED_BUILD_FOLDER}/misc/vcpkg")
             FetchContent_Populate("vcpkg"
                 GIT_REPOSITORY "https://github.com/microsoft/vcpkg.git"
                 GIT_TAG        "master"
-                SOURCE_DIR     "${FETCHED_VCPKG_DIR}"
+                SOURCE_DIR     "${FETCHED_VCPKG_DIR_}"
             )
-            file(TOUCH "${UPPER_BUILD_FOLDER}/fetched/.gdignore")
             if(WIN32)
-                execute_process(COMMAND "${FETCHED_VCPKG_DIR}/bootstrap-vcpkg.bat" "-disableMetrics")
+                execute_process(COMMAND "${FETCHED_VCPKG_DIR_}/bootstrap-vcpkg.bat" "-disableMetrics")
             else()
-                execute_process(COMMAND "${FETCHED_VCPKG_DIR}/bootstrap-vcpkg.sh" "-disableMetrics")
+                execute_process(COMMAND "${FETCHED_VCPKG_DIR_}/bootstrap-vcpkg.sh" "-disableMetrics")
             endif()
-            set(PATH_TO_VCPKG_ "${FETCHED_VCPKG_DIR}/scripts/buildsystems/vcpkg.cmake")
+            set(PATH_TO_VCPKG_ "${FETCHED_VCPKG_DIR_}/scripts/buildsystems/vcpkg.cmake")
         endif()
         set(CMAKE_TOOLCHAIN_FILE "${PATH_TO_VCPKG_}" CACHE FILEPATH "Use vcpkg as the toolchain" FORCE)
     endif()

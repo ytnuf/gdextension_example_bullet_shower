@@ -22,9 +22,10 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
 endif()
 
 # Make godot ignore the build directory
-if(NOT UPPER_BUILD_FOLDER STREQUAL PROJECT_BINARY_DIR)
-    file(TOUCH "${PROJECT_BINARY_DIR}/.gdignore")
-endif()
+file(TOUCH "${PROJECT_BINARY_DIR}/.gdignore")
+file(MAKE_DIRECTORY "${SHARED_BUILD_FOLDER}/misc")
+file(TOUCH "${SHARED_BUILD_FOLDER}/misc/.gdignore")
+
 
 add_subdirectory("src/")
 
