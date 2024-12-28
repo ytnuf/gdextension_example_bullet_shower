@@ -20,7 +20,7 @@ function(add_gdextension_library TARGET_NAME)
         DEBUG_POSTFIX               ".debug"
         LIBRARY_OUTPUT_DIRECTORY    "$<1:${PROJECT_BINARY_DIR}/lib>"
         OUTPUT_NAME                 "${TARGET_NAME}.${GDEXTENSION_TARGET_PLATFORM}"
-        PREFIX                      "${CMAKE_SHARED_LIBRARY_PREFIX}"
+        PREFIX                      "lib"
         RUNTIME_OUTPUT_DIRECTORY    "$<1:${PROJECT_BINARY_DIR}/lib>"
         SUFFIX                      "${CMAKE_SHARED_LIBRARY_SUFFIX}"
         VISIBILITY_INLINES_HIDDEN   ON
