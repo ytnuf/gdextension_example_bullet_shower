@@ -75,6 +75,12 @@
             "generator": "Ninja",
             "environment": {
                 "NINJA_STATUS": "%p [%es] (%f/%t)  -"
+            },
+            "cacheVariables": {
+                "USE_CCACHE": {
+                    "type": "BOOL",
+                    "value": "ON"
+                }
             }
         },
         {
