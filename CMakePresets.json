@@ -70,11 +70,15 @@
             }
         },
         {
-            "name": ".ninja",
+            "name": ".ninja-x64",
             "hidden": true,
             "generator": "Ninja",
             "environment": {
                 "NINJA_STATUS": "%p [%es] (%f/%t)  -"
+            },
+            "architecture": {
+                "value": "x64",
+                "strategy": "external"
             },
             "cacheVariables": {
                 "USE_CCACHE": {
@@ -111,6 +115,10 @@
                 "CMAKE_CXX_COMPILER": {
                     "type": "STRING",
                     "value": "g++"
+                },
+                "GDEXTENSION_TARGET_PLATFORM": {
+                    "type": "STRING",
+                    "value": "linux.x86_64"
                 },
                 "VCPKG_TARGET_TRIPLET": {
                     "type": "STRING",
@@ -153,6 +161,10 @@
             "name": ".mingw-x64",
             "hidden": true,
             "cacheVariables": {
+                "GDEXTENSION_TARGET_PLATFORM": {
+                    "type": "STRING",
+                    "value": "windows.x86_64"
+                },
                 "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": {
                     "type": "FILEPATH",
                     "value": "${sourceDir}/cmake/toolchains/mingw64-toolchain.cmake"
@@ -186,35 +198,35 @@
             }
         },
         {
-            "name": "debug-gcc-ninja-linux-x86_64",
+            "name": "debug-gcc-linux-x64-ninja",
             "hidden": false,
-            "displayName": "Debug [GCC][Ninja][Linux x86_64]",
-            "description": "Debug build with g++ and ninja, for Linux x86_64 systems",
+            "displayName": "Debug[GCC][Linux x64][Ninja]",
+            "description": "Debug build with g++ and ninja-single, for Linux x86_64 target",
             "inherits": [
                 ".base",
                 ".debug",
                 ".ubsan",
-                ".ninja",
+                ".ninja-x64",
                 ".gcc-x64"
             ]
         },
         {
-            "name": "release-gcc-ninja-linux-x86_64",
+            "name": "release-gcc-linux-x64-ninja",
             "hidden": false,
-            "displayName": "Release [GCC][Ninja][Linux x86_64]",
-            "description": "Release build with g++ and ninja, for Linux x86_64 systems",
+            "displayName": "Release[GCC][Linux x64][Ninja]",
+            "description": "Release build with g++ and ninja-single, for Linux x86_64 target",
             "inherits": [
                 ".base",
                 ".release",
-                ".ninja",
+                ".ninja-x64",
                 ".gcc-x64"
             ]
         },
         {
-            "name": "msvc-msbuild-x86_64",
+            "name": "msvc-windows-x64-msbuild",
             "hidden": false,
-            "displayName": "MSVC [MsBuild][Windows x86_64]",
-            "description": "Build with msvc and msbuild for Windows x86_64 systems",
+            "displayName": "MSVC[Windows x64][MSBuild]",
+            "description": "Build with MSVC and MSBuild for Windows x86_64 target",
             "inherits": [
                 ".base",
                 ".msbuild-x64",
@@ -222,91 +234,91 @@
             ]
         },
         {
-            "name": "debug-mingw64-ninja-x86_64",
+            "name": "debug-mingw64-windows-x64-ninja",
             "hidden": false,
-            "displayName": "Debug [MinGW-w64][Ninja][Windows x86_64 Target]",
-            "description": "Debug build with g++ and ninja, for Windows x86_64 systems",
+            "displayName": "Debug[MinGW][Windows x64][Ninja]",
+            "description": "Debug build with mingw-w64 and ninja-single, for Windows x86_64 target",
             "inherits": [
                 ".base",
                 ".debug",
-                ".ninja",
+                ".ninja-x64",
                 ".mingw-x64"
             ]
         },
         {
-            "name": "release-mingw64-ninja-x86_64",
+            "name": "release-mingw64-windows-x64-ninja",
             "hidden": false,
-            "displayName": "Release [MinGW-w64][Ninja][Windows x86_64 Target]",
-            "description": "Release build with g++ and ninja, for Windows x86_64 systems",
+            "displayName": "Release[MinGW][Windows x64][Ninja]",
+            "description": "Release build with mingw-w64 and ninja-single, for Windows x86_64 target",
             "inherits": [
                 ".base",
                 ".release",
-                ".ninja",
+                ".ninja-x64",
                 ".mingw-x64"
             ]
         },
         {
-            "name": "debug-emscripten-ninja-web",
+            "name": "debug-emscripten-web-ninja",
             "hidden": false,
-            "displayName": "Debug [Emscripten][Ninja][Web Target]",
-            "description": "Debug build with emc++ and ninja, for Web target",
+            "displayName": "Debug[Emscripten][Web][Ninja]",
+            "description": "Debug build with emc++ and ninja-single, for Web target",
             "inherits": [
                 ".base",
                 ".debug",
-                ".ninja",
+                ".ninja-x64",
                 ".emscripten"
             ]
         },
         {
-            "name": "release-emscripten-ninja-web",
+            "name": "release-emscripten-web-ninja",
             "hidden": false,
-            "displayName": "Release [Emscripten][Ninja][Web Target]",
+            "displayName": "Release [Emscripten][Web][Ninja]",
             "description": "Release build with emc++ and ninja, for Web target",
             "inherits": [
                 ".base",
                 ".release",
-                ".ninja",
+                ".ninja-x64",
                 ".emscripten"
             ]
         }
     ],
     "buildPresets": [
         {
-            "name": "debug-gcc-ninja-linux-x86_64",
-            "configurePreset": "debug-gcc-ninja-linux-x86_64"
+            "name": "debug-gcc-linux-x64-ninja",
+            "configurePreset": "debug-gcc-linux-x64-ninja"
         },
         {
-            "name": "release-gcc-ninja-linux-x86_64",
-            "configurePreset": "release-gcc-ninja-linux-x86_64"
+            "name": "release-gcc-linux-x64-ninja",
+            "configurePreset": "release-gcc-linux-x64-ninja"
         },
         {
-            "name": "debug-mingw64-ninja-x86_64",
-            "configurePreset": "debug-mingw64-ninja-x86_64"
+            "name": "debug-mingw64-windows-x64-ninja",
+            "configurePreset": "debug-mingw64-windows-x64-ninja"
         },
         {
-            "name": "release-mingw64-ninja-x86_64",
-            "configurePreset": "release-mingw64-ninja-x86_64"
+            "name": "release-mingw64-windows-x64-ninja",
+            "configurePreset": "release-mingw64-windows-x64-ninja"
         },
         {
-            "name": "debug-emscripten-ninja-web",
-            "configurePreset": "debug-emscripten-ninja-web"
+            "name": "debug-emscripten-web-ninja",
+            "configurePreset": "debug-emscripten-web-ninja"
         },
         {
-            "name": "release-emscripten-ninja-web",
-            "configurePreset": "release-emscripten-ninja-web"
+            "name": "release-emscripten-web-ninja",
+            "configurePreset": "release-emscripten-web-ninja"
         },
         {
-            "name": "debug-msvc-msbuild-x86_64",
-            "displayName": "Debug [MSVC][MsBuild][Windows x86_64]",
-            "description": "Debug build with msvc and msbuild for Windows x86_64 systems",
-            "configurePreset": "msvc-msbuild-x86_64",
+            "name": "debug-msvc-windows-x64-msbuild",
+            "displayName": "Debug[MSVC][Windows x64][MSBuild]",
+            "description": "Debug build with msvc and MSBuild for Windows x86_64 target",
+            "configurePreset": "msvc-windows-x64-msbuild",
             "configuration": "Debug"
         },
         {
-            "name": "release-msvc-msbuild-x86_64",
-            "displayName": "Release [MSVC][MsBuild][Windows x86_64]",
-            "description": "Release build with msvc and msbuild for Windows x86_64 systems",
-            "configurePreset": "msvc-msbuild-x86_64",
+            "name": "release-msvc-windows-x64-msbuild",
+            "displayName": "Release[MSVC][Windows x64][MSBuild]",
+            "description": "Release build with msvc and MSBuild for Windows x86_64 target",
+            "configurePreset": "msvc-windows-x64-msbuild",
             "configuration": "Release"
         }
     ]
