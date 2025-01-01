@@ -15,6 +15,20 @@ This project contains the following:
 - An included demo godot project
 
 
+
+## Other Example Projects:  
+
+https://github.com/asmaloney/GDExtensionTemplate
+
+https://github.com/vorlac/godot-roguelite
+
+
+## Screenshots
+
+![No collision](screenshots/no_collision.png)
+
+![Collision](screenshots/collision.png)
+
 ---
 Note for vs-code users:  
 You may want to add ```"cmake.copyCompileCommands": "${workspaceFolder}/compile_commands.json"``` to your workspace settings (```.vscode/settings.json```) for clangd to work properly
