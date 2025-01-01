@@ -70,15 +70,11 @@
             }
         },
         {
-            "name": ".ninja-x64",
+            "name": ".ninja",
             "hidden": true,
             "generator": "Ninja",
             "environment": {
                 "NINJA_STATUS": "%p [%es] (%f/%t)  -"
-            },
-            "architecture": {
-                "value": "x64",
-                "strategy": "external"
             },
             "cacheVariables": {
                 "USE_CCACHE": {
@@ -198,6 +194,28 @@
             }
         },
         {
+            "name": ".ndk-arm64",
+            "hidden": true,
+            "cacheVariables": {
+                "ANDROID_ABI": {
+                    "type": "STRING",
+                    "value": "arm64-v8a"
+                },
+                "GDEXTENSION_TARGET_PLATFORM": {
+                    "type": "STRING",
+                    "value": "android.arm64"
+                },
+                "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": {
+                    "type": "FILEPATH",
+                    "value": "$env{ANDROID_NDK_HOME}/build/cmake/android-legacy.toolchain.cmake"
+                },
+                "VCPKG_TARGET_TRIPLET": {
+                    "type": "STRING",
+                    "value": "arm64-android"
+                }
+            }
+        },
+        {
             "name": "debug-gcc-linux-x64-ninja",
             "hidden": false,
             "displayName": "Debug[GCC][Linux x64][Ninja]",
@@ -206,7 +224,7 @@
                 ".base",
                 ".debug",
                 ".ubsan",
-                ".ninja-x64",
+                ".ninja",
                 ".gcc-x64"
             ]
         },
@@ -218,7 +236,7 @@
             "inherits": [
                 ".base",
                 ".release",
-                ".ninja-x64",
+                ".ninja",
                 ".gcc-x64"
             ]
         },
@@ -241,7 +259,7 @@
             "inherits": [
                 ".base",
                 ".debug",
-                ".ninja-x64",
+                ".ninja",
                 ".mingw-x64"
             ]
         },
@@ -253,7 +271,7 @@
             "inherits": [
                 ".base",
                 ".release",
-                ".ninja-x64",
+                ".ninja",
                 ".mingw-x64"
             ]
         },
@@ -265,20 +283,44 @@
             "inherits": [
                 ".base",
                 ".debug",
-                ".ninja-x64",
+                ".ninja",
                 ".emscripten"
             ]
         },
         {
             "name": "release-emscripten-web-ninja",
             "hidden": false,
-            "displayName": "Release [Emscripten][Web][Ninja]",
+            "displayName": "Release[Emscripten][Web][Ninja]",
             "description": "Release build with emc++ and ninja, for Web target",
             "inherits": [
                 ".base",
                 ".release",
-                ".ninja-x64",
+                ".ninja",
                 ".emscripten"
+            ]
+        },
+        {
+            "name": "debug-ndk-android-arm64-ninja",
+            "hidden": false,
+            "displayName": "Debug[NDK][Android arm64][Ninja]",
+            "description": "Debug build with NDK and ninja, for Android arm64 target",
+            "inherits": [
+                ".base",
+                ".debug",
+                ".ninja",
+                ".ndk-arm64"
+            ]
+        },
+        {
+            "name": "release-ndk-android-arm64-ninja",
+            "hidden": false,
+            "displayName": "Release[NDK][Android arm64][Ninja]",
+            "description": "Release build with NDK and ninja, for Android arm64 target",
+            "inherits": [
+                ".base",
+                ".release",
+                ".ninja",
+                ".ndk-arm64"
             ]
         }
     ],
@@ -290,6 +332,20 @@
         {
             "name": "release-gcc-linux-x64-ninja",
             "configurePreset": "release-gcc-linux-x64-ninja"
+        },
+        {
+            "name": "debug-msvc-windows-x64-msbuild",
+            "displayName": "Debug[MSVC][Windows x64][MSBuild]",
+            "description": "Debug build with msvc and MSBuild for Windows x86_64 target",
+            "configurePreset": "msvc-windows-x64-msbuild",
+            "configuration": "Debug"
+        },
+        {
+            "name": "release-msvc-windows-x64-msbuild",
+            "displayName": "Release[MSVC][Windows x64][MSBuild]",
+            "description": "Release build with msvc and MSBuild for Windows x86_64 target",
+            "configurePreset": "msvc-windows-x64-msbuild",
+            "configuration": "Release"
         },
         {
             "name": "debug-mingw64-windows-x64-ninja",
@@ -308,18 +364,12 @@
             "configurePreset": "release-emscripten-web-ninja"
         },
         {
-            "name": "debug-msvc-windows-x64-msbuild",
-            "displayName": "Debug[MSVC][Windows x64][MSBuild]",
-            "description": "Debug build with msvc and MSBuild for Windows x86_64 target",
-            "configurePreset": "msvc-windows-x64-msbuild",
-            "configuration": "Debug"
+            "name": "debug-ndk-android-arm64-ninja",
+            "configurePreset": "debug-ndk-android-arm64-ninja"
         },
         {
-            "name": "release-msvc-windows-x64-msbuild",
-            "displayName": "Release[MSVC][Windows x64][MSBuild]",
-            "description": "Release build with msvc and MSBuild for Windows x86_64 target",
-            "configurePreset": "msvc-windows-x64-msbuild",
-            "configuration": "Release"
+            "name": "release-ndk-android-arm64-ninja",
+            "configurePreset": "release-ndk-android-arm64-ninja"
         }
     ]
 }

@@ -8,6 +8,8 @@ add_gdextension_library("${PROJECT_NAME}"
     SUPPORTED_PLAFORMS
         "linux.x86_64"
         "windows.x86_64"
+        "web.wasm32"
+        "android.arm64"
 )
 
 target_sources("${PROJECT_NAME}" PRIVATE
