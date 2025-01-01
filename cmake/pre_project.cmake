@@ -2,10 +2,13 @@
 # These variables should be set by presets
 option(USE_CCACHE "Use ccache if found" OFF)
 option(USE_VCPKG "Fetch vcpkg if not found" ON)
-set(SHARED_BUILD_FOLDER "${CMAKE_SOURCE_DIR}/build/_shared" CACHE PATH "The folder that contains files that are shared amongst build configurations")
+
+set(SHARED_BUILD_FOLDER_REL "build/_shared" CACHE STRING "The relative folder that contains the .gdextension file and misc that are shared amongst build configurations")
+set(SHARED_BUILD_FOLDER_ABS "${CMAKE_SOURCE_DIR}/${SHARED_BUILD_FOLDER_REL}")
+
 
 # Note: CMAKE_TOOLCHAIN_FILE must be set before the project() call
-function(obtain_vcpkg)
+function(obtain_vcpkg_)
     if(EXISTS "${CMAKE_TOOLCHAIN_FILE}")
         get_filename_component(TOOLCHAIN_FILENAME_ "${CMAKE_TOOLCHAIN_FILE}" NAME)
         if(TOOLCHAIN_FILENAME_ STREQUAL "vcpkg.cmake")
@@ -19,7 +22,7 @@ function(obtain_vcpkg)
         if(NOT EXISTS "${PATH_TO_VCPKG_}")
             message(STATUS "Cannot find vcpkg, falling back to FetchContent")
             include("FetchContent")
-            set(FETCHED_VCPKG_DIR_ "${SHARED_BUILD_FOLDER}/misc/vcpkg")
+            set(FETCHED_VCPKG_DIR_ "${SHARED_BUILD_FOLDER_ABS}/misc/vcpkg")
             FetchContent_Populate("vcpkg"
                 GIT_REPOSITORY "https://github.com/microsoft/vcpkg.git"
                 GIT_TAG        "master"
@@ -37,7 +40,7 @@ function(obtain_vcpkg)
 endfunction()
 
 if(USE_VCPKG)
-    obtain_vcpkg()
+    obtain_vcpkg_()
 endif()
 
 

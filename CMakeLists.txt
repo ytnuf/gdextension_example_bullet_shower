@@ -3,7 +3,9 @@ cmake_minimum_required(VERSION 3.29)
 
 include("cmake/pre_project.cmake")
 
-project("gdextension_example_bullet_shower")
+project("gdextension_example_bullet_shower"
+    LANGUAGES "CXX"
+)
 
 get_property(IS_MULTICONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
 
@@ -31,10 +33,32 @@ if( (NOT CMAKE_BUILD_TYPE) AND (NOT IS_MULTICONFIG) )
     set(CMAKE_BUILD_TYPE "Debug")
 endif()
 
-# Make godot ignore the build directory
-file(TOUCH "${PROJECT_BINARY_DIR}/.gdignore")
-file(MAKE_DIRECTORY "${SHARED_BUILD_FOLDER}/misc")
-file(TOUCH "${SHARED_BUILD_FOLDER}/misc/.gdignore")
+
+# Typically we want godot to ignore the build directory
+# However it may contain the .gdextension file (which cannot be ignored)
+# As the build folder and the folder that contains the .gdextension are specified externally
+block()
+    # Check if the build directory is a ancestor of the .gdextension file
+    set(GDEXTENSION_FILE_INSIDE_BUILD_DIRECTORY OFF)
+    set(TO_SHARED_FOLDER "${CMAKE_SOURCE_DIR}")
+    if(TO_SHARED_FOLDER STREQUAL PROJECT_BINARY_DIR)
+        set(GDEXTENSION_FILE_INSIDE_BUILD_DIRECTORY ON)
+    endif()
+    string(REGEX REPLACE "/" ";" SHARED_BUILD_COMPONENT_LST "${SHARED_BUILD_FOLDER_REL}")
+    foreach(SHARED_FOLDER_COMPONETNS IN LISTS SHARED_BUILD_COMPONENT_LST)
+        set(TO_SHARED_FOLDER "${TO_SHARED_FOLDER}/${SHARED_FOLDER_COMPONETNS}")
+        if(TO_SHARED_FOLDER STREQUAL PROJECT_BINARY_DIR)
+            set(GDEXTENSION_FILE_INSIDE_BUILD_DIRECTORY ON)
+        endif()
+    endforeach()
+    # And add a .gdignore there if that's not the case
+    if(NOT GDEXTENSION_FILE_INSIDE_BUILD_DIRECTORY)
+        file(TOUCH "${PROJECT_BINARY_DIR}/.gdignore")
+    endif()
+endblock()
+# Also a .gdignore file for the misc directory too
+file(MAKE_DIRECTORY "${SHARED_BUILD_FOLDER_ABS}/misc")
+file(TOUCH "${SHARED_BUILD_FOLDER_ABS}/misc/.gdignore")
 
 
 add_subdirectory("src/")
