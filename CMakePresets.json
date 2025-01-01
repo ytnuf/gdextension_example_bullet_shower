@@ -6,6 +6,7 @@
             "hidden": true,
             "binaryDir": "${sourceDir}/build/${presetName}/",
             "installDir": "${sourceDir}/addons/gdextension_example_bullet_shower",
+            "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
             "cacheVariables": {
                 "CMAKE_COLOR_DIAGNOSTICS": {
                     "type": "BOOL",
@@ -14,10 +15,6 @@
                 "CMAKE_EXPORT_COMPILE_COMMANDS": {
                     "type": "BOOL",
                     "value": "ON"
-                },
-                "CMAKE_TOOLCHAIN_FILE": {
-                    "type": "FILEPATH",
-                    "value": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
                 },
                 "ENABLE_ADDITIONAL_WARNINGS": {
                     "type": "BOOL",
