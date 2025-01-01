@@ -6,6 +6,7 @@ option(ENABLE_ADDRESS_SANTISER "Turn on sanitiser for memory errors, can noticea
 option(ENABLE_UNDEFINED_BEHAVIOUR_SANTISER "Turn on sanitiser for undefined behaviour (for GCC & Clang)" OFF)
 
 string(TOLOWER "${CMAKE_SYSTEM_NAME}.${CMAKE_SYSTEM_PROCESSOR}" _GDEXTENSION_TARGET_PLATFORM_)
+string(REGEX REPLACE "amd64" "x86_64" _GDEXTENSION_TARGET_PLATFORM_ "${_GDEXTENSION_TARGET_PLATFORM_}")
 set(GDEXTENSION_TARGET_PLATFORM "${_GDEXTENSION_TARGET_PLATFORM_}" CACHE STRING "The platform this gdextension is targetted for")
 
 

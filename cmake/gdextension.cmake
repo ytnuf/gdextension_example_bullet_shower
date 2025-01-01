@@ -114,7 +114,6 @@ function(_gdextension_regenerate_library_path TARGET_NAME GDEXTENSION_FILENAME L
     # (due to an annoying limitation of cmake lists, this doesn't handle semi-colons well)
     file(STRINGS "${GDEXTENSION_FILENAME}" GDEXTENSION_CONFIG)
     # Handle the difference between single and multi config by putting the configs in a list
-    get_property(IS_MULTICONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
     if(IS_MULTICONFIG)
         string(TOLOWER "${CMAKE_CONFIGURATION_TYPES}" LOWERCASE_CONFIG_LST)
     else()
