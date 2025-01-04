@@ -21,6 +21,7 @@ function(add_gdextension_library TARGET_NAME)
         LIBRARY_OUTPUT_DIRECTORY    "$<1:${PROJECT_BINARY_DIR}/lib>"
         OUTPUT_NAME                 "${TARGET_NAME}.${GDEXTENSION_TARGET_PLATFORM}"
         PREFIX                      "lib"
+        RELEASE_POSTFIX              ".release"
         RUNTIME_OUTPUT_DIRECTORY    "$<1:${PROJECT_BINARY_DIR}/lib>"
         SUFFIX                      "${CMAKE_SHARED_LIBRARY_SUFFIX}"
         VISIBILITY_INLINES_HIDDEN   ON
@@ -89,7 +90,7 @@ function(_create_gdextension_file TARGET_NAME)
             set(OUTPUT_SUFFIX ".dll")
         endif()
         get_target_property(OUTPUT_PREFIX "${TARGET_NAME}" PREFIX)
-        set(RELEASE_PATH "${PLATFORM}.release = \"res://addons/${PROJECT_NAME}/lib/${OUTPUT_PREFIX}${PROJECT_NAME}.${PLATFORM}${OUTPUT_SUFFIX}\"")
+        set(RELEASE_PATH "${PLATFORM}.release = \"res://addons/${PROJECT_NAME}/lib/${OUTPUT_PREFIX}${PROJECT_NAME}.${PLATFORM}.release${OUTPUT_SUFFIX}\"")
         set(DEBUG_PATH "${PLATFORM}.debug = \"res://addons/${PROJECT_NAME}/lib/${OUTPUT_PREFIX}${PROJECT_NAME}.${PLATFORM}.debug${OUTPUT_SUFFIX}\"")
         set(LIBRARY_SECTION "${LIBRARY_SECTION}${RELEASE_PATH}\n${DEBUG_PATH}\n")
     endforeach()
@@ -134,12 +135,8 @@ function(_gdextension_regenerate_library_path TARGET_NAME GDEXTENSION_FILENAME L
         get_target_property(PREFIX "${TARGET_NAME}" PREFIX)
         get_target_property(OUTPUT_NAME "${TARGET_NAME}" OUTPUT_NAME)
         get_target_property(SUFFIX "${TARGET_NAME}" SUFFIX)
-        if(LOWERCASE_BUILD_TYPE STREQUAL "debug")
-            get_target_property(DEBUG_POSTFIX "${TARGET_NAME}" DEBUG_POSTFIX)
-        else()
-            set(DEBUG_POSTFIX)
-        endif()
-        set(FULL_LIBRARY_NAME "${LIBRARY_PATH_DIR}/${PREFIX}${OUTPUT_NAME}${DEBUG_POSTFIX}${SUFFIX}")
+        set(POSTFIX ".${LOWERCASE_BUILD_TYPE}")
+        set(FULL_LIBRARY_NAME "${LIBRARY_PATH_DIR}/${PREFIX}${OUTPUT_NAME}${POSTFIX}${SUFFIX}")
         # Add the new filepath to the config list
         list(APPEND GDEXTENSION_CONFIG "${FEATURE_TAG} = \"${FULL_LIBRARY_NAME}\"")
     endforeach()
