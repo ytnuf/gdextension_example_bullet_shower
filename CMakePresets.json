@@ -8,10 +8,6 @@
             "installDir": "${sourceDir}/addons/gdextension_example_bullet_shower",
             "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
             "cacheVariables": {
-                "CMAKE_COLOR_DIAGNOSTICS": {
-                    "type": "BOOL",
-                    "value": "ON"
-                },
                 "CMAKE_EXPORT_COMPILE_COMMANDS": {
                     "type": "BOOL",
                     "value": "ON"
@@ -84,6 +80,10 @@
                 "NINJA_STATUS": "%p [%es] (%f/%t)  -"
             },
             "cacheVariables": {
+                "CMAKE_COLOR_DIAGNOSTICS": {
+                    "type": "BOOL",
+                    "value": "ON"
+                },
                 "USE_CCACHE": {
                     "type": "BOOL",
                     "value": "ON"
@@ -121,7 +121,7 @@
                 },
                 "GDEXTENSION_TARGET_PLATFORM": {
                     "type": "STRING",
-                    "value": "linux.x86_64"
+                    "value": "linux.x86_64.single"
                 },
                 "VCPKG_TARGET_TRIPLET": {
                     "type": "STRING",
@@ -152,7 +152,7 @@
                 },
                 "GDEXTENSION_TARGET_PLATFORM": {
                     "type": "STRING",
-                    "value": "windows.x86_64"
+                    "value": "windows.x86_64.single"
                 },
                 "VCPKG_TARGET_TRIPLET": {
                     "type": "STRING",
@@ -166,7 +166,7 @@
             "cacheVariables": {
                 "GDEXTENSION_TARGET_PLATFORM": {
                     "type": "STRING",
-                    "value": "windows.x86_64"
+                    "value": "windows.x86_64.single"
                 },
                 "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": {
                     "type": "FILEPATH",
@@ -188,7 +188,7 @@
                 },
                 "GDEXTENSION_TARGET_PLATFORM": {
                     "type": "STRING",
-                    "value": "web.wasm32"
+                    "value": "web.wasm32.single"
                 },
                 "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": {
                     "type": "FILEPATH",
@@ -210,7 +210,7 @@
                 },
                 "GDEXTENSION_TARGET_PLATFORM": {
                     "type": "STRING",
-                    "value": "android.arm64"
+                    "value": "android.arm64.single"
                 },
                 "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": {
                     "type": "FILEPATH",
