@@ -47,6 +47,16 @@
             }
         },
         {
+            "name": ".editor",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": {
+                    "type": "STRING",
+                    "value": "Editor"
+                }
+            }
+        },
+        {
             "name": ".ubsan",
             "hidden": true,
             "cacheVariables": {
@@ -62,7 +72,7 @@
             "cacheVariables": {
                 "CMAKE_CONFIGURATION_TYPES": {
                     "type": "STRING",
-                    "value": "Debug;Release"
+                    "value": "Debug;Release;Editor"
                 }
             }
         },
@@ -220,7 +230,6 @@
             "inherits": [
                 ".base",
                 ".debug",
-                ".ubsan",
                 ".ninja",
                 ".gcc-x64"
             ]
@@ -233,6 +242,18 @@
             "inherits": [
                 ".base",
                 ".release",
+                ".ninja",
+                ".gcc-x64"
+            ]
+        },
+        {
+            "name": "editor-gcc-linux-x64-ninja",
+            "hidden": false,
+            "displayName": "Editor[GCC][Linux x64][Ninja]",
+            "description": "Editor build with g++ and ninja-single, for Linux x86_64 target",
+            "inherits": [
+                ".base",
+                ".editor",
                 ".ninja",
                 ".gcc-x64"
             ]
@@ -329,6 +350,10 @@
         {
             "name": "release-gcc-linux-x64-ninja",
             "configurePreset": "release-gcc-linux-x64-ninja"
+        },
+        {
+            "name": "editor-gcc-linux-x64-ninja",
+            "configurePreset": "editor-gcc-linux-x64-ninja"
         },
         {
             "name": "debug-msvc-windows-x64-msbuild",

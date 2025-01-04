@@ -18,6 +18,7 @@ function(add_gdextension_library TARGET_NAME)
         ARCHIVE_OUTPUT_DIRECTORY    "$<1:${PROJECT_BINARY_DIR}/lib>"
         CXX_VISIBILITY_PRESET       "hidden"
         DEBUG_POSTFIX               ".debug"
+        EDITOR_POSTFIX               ".editor"
         LIBRARY_OUTPUT_DIRECTORY    "$<1:${PROJECT_BINARY_DIR}/lib>"
         OUTPUT_NAME                 "${TARGET_NAME}.${GDEXTENSION_TARGET_PLATFORM}"
         PREFIX                      "lib"
@@ -92,7 +93,8 @@ function(_create_gdextension_file TARGET_NAME)
         get_target_property(OUTPUT_PREFIX "${TARGET_NAME}" PREFIX)
         set(RELEASE_PATH "${PLATFORM}.release = \"res://addons/${PROJECT_NAME}/lib/${OUTPUT_PREFIX}${PROJECT_NAME}.${PLATFORM}.release${OUTPUT_SUFFIX}\"")
         set(DEBUG_PATH "${PLATFORM}.debug = \"res://addons/${PROJECT_NAME}/lib/${OUTPUT_PREFIX}${PROJECT_NAME}.${PLATFORM}.debug${OUTPUT_SUFFIX}\"")
-        set(LIBRARY_SECTION "${LIBRARY_SECTION}${RELEASE_PATH}\n${DEBUG_PATH}\n")
+        set(EDITOR_PATH "${PLATFORM}.editor = \"res://addons/${PROJECT_NAME}/lib/${OUTPUT_PREFIX}${PROJECT_NAME}.${PLATFORM}.editor${OUTPUT_SUFFIX}\"")
+        set(LIBRARY_SECTION "${LIBRARY_SECTION}${RELEASE_PATH}\n${DEBUG_PATH}\n${EDITOR_PATH}\n")
     endforeach()
 
     # Create the gdextension files
