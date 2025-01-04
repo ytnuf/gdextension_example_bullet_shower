@@ -19,7 +19,7 @@ get_property(IS_MULTICONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
 include("cmake/options.cmake")
 
 if(NOT PRESET_USED)
-    message(NOTICE
+    message(WARNING
         "Presets are recommended.\n"
         "Check out 'CMakePresets.json' for a list of pre-made presets.\n"
         "You might want to create a custom preset via 'CMakeUserPresets.json' for a custom build."

@@ -20,7 +20,12 @@ function(obtain_vcpkg_)
     if(NOT IS_VCPKG_FOUND_)
         set(PATH_TO_VCPKG_ "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake")
         if(NOT EXISTS "${PATH_TO_VCPKG_}")
-            message(STATUS "Cannot find vcpkg, falling back to FetchContent")
+            message(WARNING
+                "Cannot find vcpkg at $VCPKG_ROOT\n"
+                "It is recommended to have vcpkg installed\n"
+                "With VCPKG_ROOT environmental variable set to the vcpkg directory\n"
+                "Now fetching vcpkg instead as a fallback.\n"
+            )
             include("FetchContent")
             set(FETCHED_VCPKG_DIR_ "${SHARED_BUILD_FOLDER_ABS}/misc/vcpkg")
             FetchContent_Populate("vcpkg"
