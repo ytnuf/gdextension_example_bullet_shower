@@ -34,6 +34,13 @@ if( (NOT CMAKE_BUILD_TYPE) AND (NOT IS_MULTICONFIG) )
 endif()
 
 
+add_subdirectory("src/")
+
+install(FILES "${PROJECT_SOURCE_DIR}/LICENSE.txt"
+    DESTINATION "."
+)
+
+
 # Typically we want godot to ignore the build directory
 # However it may contain the .gdextension file (which cannot be ignored)
 # As the build folder and the folder that contains the .gdextension are specified externally
@@ -59,10 +66,3 @@ endblock()
 # Also a .gdignore file for the misc directory too
 file(MAKE_DIRECTORY "${SHARED_BUILD_FOLDER_ABS}/misc")
 file(TOUCH "${SHARED_BUILD_FOLDER_ABS}/misc/.gdignore")
-
-
-add_subdirectory("src/")
-
-install(FILES "${PROJECT_SOURCE_DIR}/LICENSE.txt"
-    DESTINATION "."
-)
