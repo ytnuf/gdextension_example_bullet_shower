@@ -73,9 +73,12 @@
             }
         },
         {
-            "name": ".ninja",
+            "name": ".ninjamulti",
             "hidden": true,
-            "generator": "Ninja",
+            "generator": "Ninja Multi-Config",
+            "inherits": [
+                ".multi"
+            ],
             "environment": {
                 "NINJA_STATUS": "%p [%es] (%f/%t)  -"
             },
@@ -223,38 +226,13 @@
             }
         },
         {
-            "name": "debug-gcc-linux-x64-ninja",
+            "name": "gcc-linux-x64-ninjamulti",
             "hidden": false,
-            "displayName": "Debug[GCC][Linux x64][Ninja]",
-            "description": "Debug build with g++ and ninja-single, for Linux x86_64 target",
+            "displayName": "GCC[Linux x64][Ninja Multi]",
+            "description": "Build with g++ and ninja multi-config, for Linux x86_64 target",
             "inherits": [
                 ".base",
-                ".debug",
-                ".ninja",
-                ".gcc-x64"
-            ]
-        },
-        {
-            "name": "release-gcc-linux-x64-ninja",
-            "hidden": false,
-            "displayName": "Release[GCC][Linux x64][Ninja]",
-            "description": "Release build with g++ and ninja-single, for Linux x86_64 target",
-            "inherits": [
-                ".base",
-                ".release",
-                ".ninja",
-                ".gcc-x64"
-            ]
-        },
-        {
-            "name": "editor-gcc-linux-x64-ninja",
-            "hidden": false,
-            "displayName": "Editor[GCC][Linux x64][Ninja]",
-            "description": "Editor build with g++ and ninja-single, for Linux x86_64 target",
-            "inherits": [
-                ".base",
-                ".editor",
-                ".ninja",
+                ".ninjamulti",
                 ".gcc-x64"
             ]
         },
@@ -270,128 +248,104 @@
             ]
         },
         {
-            "name": "debug-mingw64-windows-x64-ninja",
+            "name": "mingw64-windows-x64-ninjamulti",
             "hidden": false,
-            "displayName": "Debug[MinGW][Windows x64][Ninja]",
-            "description": "Debug build with mingw-w64 and ninja-single, for Windows x86_64 target",
+            "displayName": "MinGW[Windows x64][Ninja Multi]",
+            "description": "Build with mingw-w64 and ninja multi-config, for Windows x86_64 target",
             "inherits": [
                 ".base",
-                ".debug",
-                ".ninja",
+                ".ninjamulti",
                 ".mingw-x64"
             ]
         },
         {
-            "name": "release-mingw64-windows-x64-ninja",
+            "name": "emscripten-web-ninjamulti",
             "hidden": false,
-            "displayName": "Release[MinGW][Windows x64][Ninja]",
-            "description": "Release build with mingw-w64 and ninja-single, for Windows x86_64 target",
+            "displayName": "Emscripten[Web][Ninja Multi]",
+            "description": "Build with emc++ and ninja multi-config, for Web target",
             "inherits": [
                 ".base",
-                ".release",
-                ".ninja",
-                ".mingw-x64"
-            ]
-        },
-        {
-            "name": "debug-emscripten-web-ninja",
-            "hidden": false,
-            "displayName": "Debug[Emscripten][Web][Ninja]",
-            "description": "Debug build with emc++ and ninja-single, for Web target",
-            "inherits": [
-                ".base",
-                ".debug",
-                ".ninja",
+                ".ninjamulti",
                 ".emscripten"
             ]
         },
         {
-            "name": "release-emscripten-web-ninja",
+            "name": "ndk-android-arm64-ninjamulti",
             "hidden": false,
-            "displayName": "Release[Emscripten][Web][Ninja]",
-            "description": "Release build with emc++ and ninja, for Web target",
+            "displayName": "NDK[Android arm64][Ninja Multi]",
+            "description": "Build with NDK and ninja multi-config, for Android arm64 target",
             "inherits": [
                 ".base",
-                ".release",
-                ".ninja",
-                ".emscripten"
-            ]
-        },
-        {
-            "name": "debug-ndk-android-arm64-ninja",
-            "hidden": false,
-            "displayName": "Debug[NDK][Android arm64][Ninja]",
-            "description": "Debug build with NDK and ninja, for Android arm64 target",
-            "inherits": [
-                ".base",
-                ".debug",
-                ".ninja",
-                ".ndk-arm64"
-            ]
-        },
-        {
-            "name": "release-ndk-android-arm64-ninja",
-            "hidden": false,
-            "displayName": "Release[NDK][Android arm64][Ninja]",
-            "description": "Release build with NDK and ninja, for Android arm64 target",
-            "inherits": [
-                ".base",
-                ".release",
-                ".ninja",
+                ".ninjamulti",
                 ".ndk-arm64"
             ]
         }
     ],
     "buildPresets": [
         {
-            "name": "debug-gcc-linux-x64-ninja",
-            "configurePreset": "debug-gcc-linux-x64-ninja"
+            "name": "debug-gcc-linux-x64-ninjamulti",
+            "configurePreset": "gcc-linux-x64-ninjamulti",
+            "configuration": "Debug"
         },
         {
-            "name": "release-gcc-linux-x64-ninja",
-            "configurePreset": "release-gcc-linux-x64-ninja"
+            "name": "release-gcc-linux-x64-ninjamulti",
+            "configurePreset": "gcc-linux-x64-ninjamulti",
+            "configuration": "Release"
         },
         {
-            "name": "editor-gcc-linux-x64-ninja",
-            "configurePreset": "editor-gcc-linux-x64-ninja"
+            "name": "editor-gcc-linux-x64-ninjamulti",
+            "configurePreset": "gcc-linux-x64-ninjamulti",
+            "configuration": "Editor"
         },
         {
             "name": "debug-msvc-windows-x64-msbuild",
-            "displayName": "Debug[MSVC][Windows x64][MSBuild]",
-            "description": "Debug build with msvc and MSBuild for Windows x86_64 target",
             "configurePreset": "msvc-windows-x64-msbuild",
             "configuration": "Debug"
         },
         {
             "name": "release-msvc-windows-x64-msbuild",
-            "displayName": "Release[MSVC][Windows x64][MSBuild]",
-            "description": "Release build with msvc and MSBuild for Windows x86_64 target",
             "configurePreset": "msvc-windows-x64-msbuild",
             "configuration": "Release"
         },
         {
-            "name": "debug-mingw64-windows-x64-ninja",
-            "configurePreset": "debug-mingw64-windows-x64-ninja"
+            "name": "editor-msvc-windows-x64-msbuild",
+            "configurePreset": "msvc-windows-x64-msbuild",
+            "configuration": "Editor"
         },
         {
-            "name": "release-mingw64-windows-x64-ninja",
-            "configurePreset": "release-mingw64-windows-x64-ninja"
+            "name": "debug-mingw64-windows-x64-ninjamulti",
+            "configurePreset": "mingw64-windows-x64-ninjamulti",
+            "configuration": "Debug"
         },
         {
-            "name": "debug-emscripten-web-ninja",
-            "configurePreset": "debug-emscripten-web-ninja"
+            "name": "release-mingw64-windows-x64-ninjamulti",
+            "configurePreset": "mingw64-windows-x64-ninjamulti",
+            "configuration": "Release"
         },
         {
-            "name": "release-emscripten-web-ninja",
-            "configurePreset": "release-emscripten-web-ninja"
+            "name": "editor-mingw64-windows-x64-ninjamulti",
+            "configurePreset": "mingw64-windows-x64-ninjamulti",
+            "configuration": "Editor"
         },
         {
-            "name": "debug-ndk-android-arm64-ninja",
-            "configurePreset": "debug-ndk-android-arm64-ninja"
+            "name": "debug-emscripten-web-ninjamulti",
+            "configurePreset": "emscripten-web-ninjamulti",
+            "configuration": "Debug"
         },
         {
-            "name": "release-ndk-android-arm64-ninja",
-            "configurePreset": "release-ndk-android-arm64-ninja"
+            "name": "release-emscripten-web-ninjamulti",
+            "configurePreset": "emscripten-web-ninjamulti",
+            "configuration": "Release"
+        },
+        {
+            "name": "debug-ndk-android-arm64-ninjamulti",
+            "configurePreset": "ndk-android-arm64-ninjamulti",
+            "configuration": "Debug"
+        },
+        {
+            "name": "release-ndk-android-arm64-ninjamulti",
+            "configurePreset": "ndk-android-arm64-ninjamulti",
+            "configuration": "Release"
         }
     ]
 }
