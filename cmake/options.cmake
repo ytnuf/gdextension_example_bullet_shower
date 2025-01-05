@@ -73,10 +73,42 @@ if(ENABLE_ADDITIONAL_WARNINGS)
             -Wnewline-eof
             -Wunused-exception-parameter
         >
+        $<${COMPILER_IS_MSVC}:
+            /W4
+
+            /w14062 # enumerator 'identifier' in switch of enum 'enumeration' is not handled
+            /w14263 # 'function' : member function does not override any base class virtual member function
+            /w14264 # 'virtual_function' : no override available for virtual member function from base 'class'; function is hidden
+            /w14266 # 'function' : no override available for virtual member function from base 'type'; function is hidden
+            /w14311 # 'variable' : pointer truncation from 'type' to 'type'
+            /w14545 # expression before comma evaluates to a function which is missing an argument list
+            /w14546 # function call before comma missing argument list
+            /w14547 # 'operator' : operator before comma has no effect; expected operator with side-effect
+            /w14548 # expression before comma has no effect; expected expression with side-effect
+            /w14549 # 'operator' : operator before comma has no effect; did you intend 'operator'?
+            /w14555 # expression has no effect; expected expression with side-effect
+            /w14596 # 'name': illegal qualified name in member declaration
+            /w14608 # 'union_member' has already been initialized by another union member in the initializer list, 'union_member'
+            /w14946 # reinterpret_cast used between related classes: 'class1' and 'class2'
+
+            /w24296 # 'operator' : expression is always false
+            /w24388 # 'token' : signed/unsigned mismatch
+            /w24822 # 'member' : local class member function does not have a body
+            /w24841 # non-standard extension used: compound member designator used in offsetof
+            /w24928 # illegal copy-initialization; more than one user-defined conversion has been implicitly applied
+            /w25267 # definition of implicit copy constructor/assignment operator for 'type' is deprecated because it has a user-provided assignment operator/copy constructor
+
+            /w35027 # 'type': move assignment operator was implicitly defined as deleted
+            /w34619 # #pragma warning : there is no warning number 'number'
+            /w34668 # 'symbol' is not defined as a preprocessor macro, replacing with '0' for 'directives'
+
+            /w44640 # 'instance' : construction of local static object is not thread-safe
+            /w44866 # 'file(line_number)' compiler may not enforce left-to-right evaluation order for call to operator_name
+            /w44868 # 'file(line_number)' compiler may not enforce left-to-right evaluation order in braced initializer list
+
+            /wd4244 # Unfortunately gdextension code typically has a lot of float & double mixing
+        >
     )
-    if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-        message(AUTHOR_WARNING "TODO: Add MSVC warning flags")
-    endif()
 endif()
 
 
