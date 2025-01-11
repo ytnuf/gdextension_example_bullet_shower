@@ -127,7 +127,8 @@ Here are the various build options for this project:
 - ```GDEXTENSION_TARGET_PLATFORM``` - the target feature flags
 
 
-Using this one can create a custom preset in a ```CMakeUserPresets.json``` file, for example:
+Using this one can create a custom preset in a ```CMakeUserPresets.json``` file, for example:  
+(It is recommended for your preset to inherit ```.base```)
 
 
 ```json
@@ -135,6 +136,7 @@ Using this one can create a custom preset in a ```CMakeUserPresets.json``` file,
     "configurePresets": [
         {
             "name": "my-custom-config-preset",
+            "inherits": ".base",
             "cacheVariables": {
                 "CMAKE_CXX_COMPILER": "clang++",
                 "GDEXTENSION_TARGET_PLATFORM": "linux.x86_64",
