@@ -9,7 +9,7 @@ set(CMAKE_C_COMPILER "x86_64-w64-mingw32-gcc")
 set(CMAKE_CXX_COMPILER "x86_64-w64-mingw32-g++")
 
 # Where is the target environment
-set(CMAKE_FIND_ROOT_PATH "/usr/x86_64-w64-mingw32/sys-root/mingw")
+list(APPEND CMAKE_FIND_ROOT_PATH "/usr/x86_64-w64-mingw32/sys-root/mingw")
 # Search for programs in the build host directories
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 # For libraries, headers and packages in the target directories
