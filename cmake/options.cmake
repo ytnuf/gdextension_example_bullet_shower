@@ -48,7 +48,6 @@ if(ENABLE_ADDITIONAL_WARNINGS)
             -Wstrict-overflow
             -Wuninitialized
             -Wundef
-            -Wunreachable-code
             -Wunused
             -Wwrite-strings
             # Unfortunately gdextension code typically has a lot of float & double mixing
