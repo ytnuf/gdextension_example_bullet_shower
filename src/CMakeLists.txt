@@ -6,10 +6,10 @@ add_gdextension_library("${PROJECT_NAME}"
     GDEXTENSION_VERSION_MINIMUM "4.3"
     GDEXTENSION_VERSION_MAXIMUM "4.3"
     SUPPORTED_PLAFORMS
-        "linux.x86_64"
-        "windows.x86_64"
-        "web.wasm32"
-        "android.arm64"
+        "linux.x86_64.single"
+        "windows.x86_64.single"
+        "web.wasm32.single"
+        "android.arm64.single"
 )
 
 target_sources("${PROJECT_NAME}" PRIVATE
